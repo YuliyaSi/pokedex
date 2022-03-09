@@ -2,6 +2,7 @@ import React from 'react';
 import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
 import {connect} from "react-redux";
 import {setType} from "../../redux/pokemon_reducer";
+import logo from "../../assets/logo.svg"
 
 const NavBar = ({ types, type, setType }) => {
 
@@ -11,8 +12,8 @@ const NavBar = ({ types, type, setType }) => {
                 <Navbar.Brand>
                     <img
                         alt=""
-                        src="https://raw.githubusercontent.com/sleduardo20/pokedex/0671af442dff1d8f7141e49eb83b438885bbc9e9/public/img/logo.svg"
-                        width="30"
+                        src={logo}
+                        width="60"
                         height="30"
                         className="d-inline-block align-top"
                     />{'  '}
