@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from "./components/NavBar/NavBar";
+import PokemonList from "./components/PokemonList/PokemonList";
+import {connect} from "react-redux";
+import {toggleLoading, toggleTheme} from "./redux/main_reducer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <NavBar/>
+          <div style={{height: '60px'}}/>
+        <PokemonList/>
+      </>
   );
 }
-
-export default App;
+const mapStateToProps = (state) => ({
+    darkTheme: state.main.darkTheme,
+    loading: state.main.loading,
+    types: state.main.types
+});
+export default connect(mapStateToProps, {toggleTheme, toggleLoading})(App);
