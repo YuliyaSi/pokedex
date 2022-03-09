@@ -23,10 +23,10 @@ const NavBar = ({ types, type, setType }) => {
                     <Nav>
                         <NavDropdown
                             id="nav-dropdown-dark-example"
-                            title={type}
+                            title={type.toUpperCase()}
                             menuVariant="dark"
                         >
-                            {types.map(type => <NavDropdown.Item key={type} onClick={() => setType(type.toUpperCase())}>{type.toUpperCase()}</NavDropdown.Item>)}
+                            {types.map(type => <NavDropdown.Item key={type} onClick={() => setType(type)}>{type.toUpperCase()}</NavDropdown.Item>)}
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={() => setType('All types')}>Show all types</NavDropdown.Item>
                         </NavDropdown>

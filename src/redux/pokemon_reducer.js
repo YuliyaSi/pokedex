@@ -1,6 +1,6 @@
 import {pokeApi} from "../api/api";
 
-const SET_POKEMONS = 'SET-POKEMONS', SET_URLS = 'SET-URLS', SET_TYPE = 'SET-TYPE';
+const SET_POKEMONS = 'SET-POKEMONS', SET_URLS = 'SET-URLS', SET_TYPE = 'SET-TYPE', SET_AMOUNT = 'SET-AMOUNT';
 
 let initialState = {
     pokemons: [],
@@ -27,6 +27,11 @@ const pokemon_reducer = (state = initialState, action) => {
                 ...state,
                 type: action.typeNeed
             };
+        case SET_AMOUNT:
+            return {
+                ...state,
+                amount: state.amount + 20
+            };
         default:
             return state;
     }
@@ -35,11 +40,12 @@ const pokemon_reducer = (state = initialState, action) => {
 export const setPokemons = (pokemons) => ({type: SET_POKEMONS, pokemons})
 export const setUrls = (urls) => ({type: SET_URLS, urls})
 export const setType = (typeNeed) => ({type: SET_TYPE, typeNeed})
-
+export const setAmount = () => ({type: SET_AMOUNT})
 
 // thunk creators
 export const getPokemonsList = (type, amount, urls) => async (dispatch) => {
     let promises;
+
     if(type === 'All types') {
         promises = new Array(amount).fill().map((v, i) => pokeApi.getPokeAll(i + 1));
     } else {
@@ -52,7 +58,7 @@ export const getPokemonsList = (type, amount, urls) => async (dispatch) => {
 }
 
 const getUrls = (type) => async (dispatch) => {
-    let urls = await pokeApi.getPokeByType(type.toLowerCase());
+    let urls = await pokeApi.getPokeByType(type);
     dispatch(setUrls(urls));
 }
 

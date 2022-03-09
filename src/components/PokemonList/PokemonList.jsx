@@ -2,13 +2,20 @@ import React, {useEffect} from 'react';
 import Pokemon from "./Pokemon/Pokemon";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
-import {getPokemonsList} from "../../redux/pokemon_reducer";
+import {getPokemonsList, setAmount, setPokemons} from "../../redux/pokemon_reducer";
+import Preloader from "../Preloder/Preloader";
 
-const PokemonList = ({ pokemons, amount, type, urls, getPokemonsList }) => {
+const PokemonList = ({ pokemons, amount, type, urls, getPokemonsList, setAmount }) => {
+
     useEffect(() => {
         getPokemonsList(type, amount, urls)
-    }, [type, amount, urls])
-    return (
+    }, [type, amount, urls]);
+
+    const downloadMore = () => {
+        setAmount()
+    }
+
+    return (pokemons.length === 0) ? <Preloader/> : (
         <div>
             <div style={{
                 display: 'flex',
@@ -20,7 +27,7 @@ const PokemonList = ({ pokemons, amount, type, urls, getPokemonsList }) => {
                 {pokemons?.map(poke => <div key={poke.id}><Pokemon pokemon={poke}/></div>)}
             </div>
             <div className="d-grid gap-2">
-                <Button size="lg" variant={'outline-dark'}>Download more...</Button>
+                <Button size="lg" variant={'outline-dark'} onClick={downloadMore}>Download more...</Button>
             </div>
         </div>
 
@@ -36,4 +43,4 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default connect(mapStateToProps, {getPokemonsList})(PokemonList);
+export default connect(mapStateToProps, {getPokemonsList, setAmount, setPokemons})(PokemonList);
