@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Card, Carousel, ListGroup} from "react-bootstrap";
+import styles from "./Pokemon.module.css"
 
 const Pokemon = ({pokemon}) => {
     const [show, setShow] = useState(false);
@@ -9,7 +10,7 @@ const Pokemon = ({pokemon}) => {
     }
 
     return (
-        <Card style={{width: '15rem', margin: '10px'}}>
+        <Card className={styles.card}>
             <Carousel interval={null} variant="dark">
                 <Carousel.Item>
                     <Card.Img variant="top" src={pokemon.sprites.front_default}/>

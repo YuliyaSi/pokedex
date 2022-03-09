@@ -4,6 +4,7 @@ import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
 import {getPokemonsList, setAmount, setPokemons} from "../../redux/pokemon_reducer";
 import Preloader from "../Preloder/Preloader";
+import styles from "./PokemonList.module.css"
 
 const PokemonList = ({ pokemons, amount, type, urls, getPokemonsList, setAmount }) => {
 
@@ -17,13 +18,7 @@ const PokemonList = ({ pokemons, amount, type, urls, getPokemonsList, setAmount 
 
     return (pokemons.length === 0) ? <Preloader/> : (
         <div>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: "center",
-                width: '100%',
-                flexWrap: "wrap"
-            }}>
+            <div className={styles.pokeHolder}>
                 {pokemons?.map(poke => <div key={poke.id}><Pokemon pokemon={poke}/></div>)}
             </div>
             <div className="d-grid gap-2">
